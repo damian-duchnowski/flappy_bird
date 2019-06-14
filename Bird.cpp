@@ -7,10 +7,7 @@
 
 void Bird::up()
 {
-    std::cout << velocity << std::endl;
     velocity += lift;
-    std::cout << "GO UP!" << std::endl;
-    std::cout << velocity << std::endl;
 }
 
 void Bird::render(sf::RenderWindow& win)
