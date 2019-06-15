@@ -14,12 +14,7 @@ int main()
     sf::RenderWindow win(sf::VideoMode(1920, 1080), "Flappy Bird", sf::Style::Default, settings);
     win.setFramerateLimit(60);
 
-    Bird bird;
-    std::vector<Pipe> pipes;
-
-    sf::Clock clock;
-
-    World world(bird, pipes, clock);
+    World world;
 
     // run the program as long as the window is open
     while (win.isOpen()) {

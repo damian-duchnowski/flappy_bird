@@ -8,15 +8,28 @@
 #include "Bird.h"
 #include "Pipe.h"
 class World {
-    Bird& bird;
-    std::vector<Pipe>& pipes;
+    Bird bird;
+    std::vector<Pipe> pipes;
 
-    sf::Clock& clock;
+    sf::Clock clock;
+
+    sf::Texture backgroundTexture;
+    sf::Sprite backgroundSprite;
+
+    sf::Texture groundTexture;
+    sf::RectangleShape ground;
+
+    sf::Font font;
+    sf::Text scoreLabel;
+    sf::Text scoreValue;
+
+    int score = 0;
 public:
-    World(Bird& b, std::vector<Pipe>& p, sf::Clock& cl);
+    World();
     void checkCollisions();
     void pushBirdUp() { bird.up(); }
     void step();
+    void reset();
 
     void render(sf::RenderWindow& win);
 };

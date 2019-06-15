@@ -16,17 +16,28 @@ class Pipe {
     int xPos = 1920;
     int speed = 5;
     bool pipeHit = false;
+    bool pipePassed = false;
+    bool checkedIfPassed = false;
 
+    sf::Texture topPipeTexture;
+    sf::Texture bottomPipeTexture;
 public:
     sf::RectangleShape topPipe;
     sf::RectangleShape bottomPipe;
+
+    Pipe();
 
     int getTopPipeLength() { return topPipeLength; }
     int getGapSize() { return gapSize; }
     int getXPos() { return xPos; }
     int getPipeWidth() { return pipeWidth; }
+    bool getPipeHit() { return pipeHit; }
+    bool getPipePassed() { return pipePassed; }
+    bool getCheckedIfPassed() { return checkedIfPassed; }
 
     void hitPipe() { pipeHit = true; }
+    void passPipe() { pipePassed = true; }
+    void checkIfPassed() { checkedIfPassed = true; }
 
     void render(sf::RenderWindow& win);
     void update();

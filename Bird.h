@@ -9,14 +9,21 @@
 
 class Bird {
     const int x = 1920/4;
-    double y = 1080/2.0;
+    double y = 1080/3.0;
     double velocity = 0;
     double gravity = 0.7;
     double lift = -14;
+
+    sf::Texture birdTexture;
 public:
     sf::CircleShape birdShape;
 
+    Bird() { assert(birdTexture.loadFromFile("bird.png")); }
+
+    double getVelocity() { return velocity; }
+
     void up();
+    void reset();
 
     void render(sf::RenderWindow& win);
     void update();
