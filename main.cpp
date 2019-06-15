@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Bird.h"
 #include "Pipe.h"
+#include "World.h"
 
 int main()
 {
@@ -18,24 +19,11 @@ int main()
 
     sf::Clock clock;
 
+    World world(bird, pipes, clock);
+
     // run the program as long as the window is open
     while (win.isOpen()) {
-        bird.update();
-        if (clock.getElapsedTime().asSeconds()>2.5) {
-            Pipe tempPipe;
-            pipes.push_back(tempPipe);
-            clock.restart();
-        }
-        for (auto& pipeCouple : pipes) {
-            pipeCouple.update();
-            if (bird.birdShape.getPosition().x+bird.birdShape.getRadius()>pipeCouple.getXPos()
-                    && bird.birdShape.getPosition().x<pipeCouple.getXPos()+pipeCouple.getPipeWidth()) {
-                if (bird.birdShape.getPosition().y<pipeCouple.getTopPipeLength()
-                        || bird.birdShape.getPosition().y+bird.birdShape.getRadius()
-                                >pipeCouple.getTopPipeLength()+pipeCouple.getGapSize())
-                    pipeCouple.hitPipe();
-            }
-        }
+        world.step();
 
         // check all the window's events that were triggered since the last iteration of the loop
         sf::Event event;
@@ -45,7 +33,7 @@ int main()
                 win.close();
             if (event.type==sf::Event::KeyPressed)
                 if (event.key.code==sf::Keyboard::Space) {
-                    bird.up();
+                    world.pushBirdUp();
                 }
         }
 
@@ -53,8 +41,7 @@ int main()
         win.clear(sf::Color::Black);
 
         // draw everything here...
-        bird.render(win);
-        for (auto& pipeCouple : pipes) pipeCouple.render(win);
+        world.render(win);
 
         // end the current frame
         win.display();
