@@ -1,5 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include <iostream>
 #include "Bird.h"
 #include "Pipe.h"
 
@@ -22,13 +21,20 @@ int main()
     // run the program as long as the window is open
     while (win.isOpen()) {
         bird.update();
-        if (clock.getElapsedTime().asSeconds()>0.2) {
+        if (clock.getElapsedTime().asSeconds()>2.5) {
             Pipe tempPipe;
             pipes.push_back(tempPipe);
             clock.restart();
         }
-        for (auto pipeCouple : pipes) {
+        for (auto& pipeCouple : pipes) {
             pipeCouple.update();
+            if (bird.birdShape.getPosition().x+bird.birdShape.getRadius()>pipeCouple.getXPos()
+                    && bird.birdShape.getPosition().x<pipeCouple.getXPos()+pipeCouple.getPipeWidth()) {
+                if (bird.birdShape.getPosition().y<pipeCouple.getTopPipeLength()
+                        || bird.birdShape.getPosition().y+bird.birdShape.getRadius()
+                                >pipeCouple.getTopPipeLength()+pipeCouple.getGapSize())
+                    pipeCouple.hitPipe();
+            }
         }
 
         // check all the window's events that were triggered since the last iteration of the loop
@@ -48,7 +54,7 @@ int main()
 
         // draw everything here...
         bird.render(win);
-        for (auto pipeCouple : pipes) pipeCouple.render(win);
+        for (auto& pipeCouple : pipes) pipeCouple.render(win);
 
         // end the current frame
         win.display();

@@ -9,16 +9,25 @@
 #include <SFML/Graphics.hpp>
 
 class Pipe {
-    const int pipeWidth = 100;
+    const int pipeWidth = 200;
+    int gapSize = 300;
     int topPipeLength = rand()%1080/2;
-    int bottomPipeLength = rand()%1080/2;
+    int bottomPipeLength = 1080-topPipeLength-gapSize;
     int xPos = 1920;
     int speed = 5;
+    bool pipeHit = false;
 
     sf::RectangleShape topPipe;
     sf::RectangleShape bottomPipe;
 
 public:
+    int getTopPipeLength() { return topPipeLength; }
+    int getGapSize() { return gapSize; }
+    int getXPos() { return xPos; }
+    int getPipeWidth() { return pipeWidth; }
+
+    void hitPipe() { pipeHit = true; }
+
     void render(sf::RenderWindow& win);
     void update();
 };

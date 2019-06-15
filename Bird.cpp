@@ -2,7 +2,6 @@
 // Created by Damian Duchnowski on 2019-06-14.
 //
 
-#include <iostream>
 #include "Bird.h"
 
 void Bird::up()
