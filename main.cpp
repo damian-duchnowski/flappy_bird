@@ -36,7 +36,7 @@ int main()
         win.clear(sf::Color::Black);
 
         // draw everything here...
-        world.render(win);
+        world.draw(win);
 
         // end the current frame
         win.display();

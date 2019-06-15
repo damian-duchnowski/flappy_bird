@@ -25,7 +25,7 @@ public:
     void up();
     void reset();
 
-    void render(sf::RenderWindow& win);
+    void draw(sf::RenderWindow& win);
     void update();
 };
 

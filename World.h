@@ -28,10 +28,17 @@ public:
     World();
     void checkCollisions();
     void pushBirdUp() { bird.up(); }
+    void createNewPipes();
+    void eraseOffScreenPipes(Pipe& pipeCouple);
+    void incrementScore(Pipe& pipeCouple);
+
     void step();
     void reset();
 
-    void render(sf::RenderWindow& win);
+    void drawScore();
+    void drawBackground();
+    void drawGround();
+    void draw(sf::RenderWindow& win);
 };
 
 #endif //FLAPPYBIRDWITHAI_WORLD_H

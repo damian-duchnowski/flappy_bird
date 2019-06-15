@@ -39,7 +39,7 @@ public:
     void passPipe() { pipePassed = true; }
     void checkIfPassed() { checkedIfPassed = true; }
 
-    void render(sf::RenderWindow& win);
+    void draw(sf::RenderWindow& win);
     void update();
 };
 

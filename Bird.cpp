@@ -15,7 +15,7 @@ void Bird::reset()
     velocity = 5;
 }
 
-void Bird::render(sf::RenderWindow& win)
+void Bird::draw(sf::RenderWindow& win)
 {
     birdShape.setRadius(50);
     birdShape.setPosition(x, y);
@@ -25,10 +25,8 @@ void Bird::render(sf::RenderWindow& win)
 
 void Bird::update()
 {
-    if (y>1080-birdShape.getGlobalBounds().height || y<0) velocity = 0;
-    else {
-        velocity += gravity;
-        velocity *= 0.9;
-        y += velocity;
-    }
+    velocity += gravity;
+    velocity *= 0.9;
+    y += velocity;
+
 }

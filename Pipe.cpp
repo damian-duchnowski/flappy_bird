@@ -11,7 +11,7 @@ Pipe::Pipe()
     assert(bottomPipeTexture.loadFromFile("bottomPipe.png"));
 }
 
-void Pipe::render(sf::RenderWindow& win)
+void Pipe::draw(sf::RenderWindow& win)
 {
     topPipe.setTexture(&topPipeTexture);
     topPipe.setPosition(xPos, 0);
