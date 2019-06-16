@@ -2,6 +2,9 @@
 #include "Bird.h"
 #include "Pipe.h"
 #include "World.h"
+#include "Matrix.hpp"
+#include "NeuralNet.hpp"
+
 
 int main()
 {
@@ -15,7 +18,6 @@ int main()
     win.setFramerateLimit(60);
 
     World world;
-
     // run the program as long as the window is open
     while (win.isOpen()) {
         world.step();
@@ -26,10 +28,6 @@ int main()
             // "close requested" event: we close the window
             if (event.type==sf::Event::Closed)
                 win.close();
-            if (event.type==sf::Event::KeyPressed)
-                if (event.key.code==sf::Keyboard::Space) {
-                    world.pushBirdUp();
-                }
         }
 
         // clear the window with black color

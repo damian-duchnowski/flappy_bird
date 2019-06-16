@@ -8,7 +8,8 @@
 #include "Bird.h"
 #include "Pipe.h"
 class World {
-    Bird bird;
+    const int TOTAL = 30;
+    std::vector<Bird> birds;
     std::vector<Pipe> pipes;
 
     sf::Clock clock;
@@ -26,11 +27,11 @@ class World {
     int score = 0;
 public:
     World();
-    void checkCollisions();
-    void pushBirdUp() { bird.up(); }
+    void checkCollisions(Bird& bird);
+    void pushBirdUp(Bird& bird) { bird.up(); }
     void createNewPipes();
     void eraseOffScreenPipes(Pipe& pipeCouple);
-    void incrementScore(Pipe& pipeCouple);
+    void incrementScore(Pipe& pipeCouple, Bird& bird);
 
     void step();
     void reset();

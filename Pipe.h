@@ -28,6 +28,7 @@ public:
     Pipe();
 
     int getTopPipeLength() { return topPipeLength; }
+    int getBottomPipeLength() { return bottomPipeLength; }
     int getGapSize() { return gapSize; }
     int getXPos() { return xPos; }
     int getPipeWidth() { return pipeWidth; }

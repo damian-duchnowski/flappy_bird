@@ -2,17 +2,22 @@
 // Created by Damian Duchnowski on 2019-06-15.
 //
 
-#include <iostream>
 #include "World.h"
 
 World::World()
 {
+    for (int i = 0; i<TOTAL; ++i) {
+        Bird tempBird;
+        birds.push_back(tempBird);
+    }
+    Pipe tempPipe;
+    pipes.push_back(tempPipe);
     drawBackground();
 //    drawGround();
     drawScore();
 }
 
-void World::checkCollisions()
+void World::checkCollisions(Bird& bird)
 {
     for (auto& pipeCouple : pipes) {
         if (bird.birdShape.getGlobalBounds().intersects(pipeCouple.topPipe.getGlobalBounds())
@@ -37,7 +42,7 @@ void World::eraseOffScreenPipes(Pipe& pipeCouple)
     }
 }
 
-void World::incrementScore(Pipe& pipeCouple)
+void World::incrementScore(Pipe& pipeCouple, Bird& bird)
 {
     if (!pipeCouple.getCheckedIfPassed() && pipeCouple.getXPos()+pipeCouple.getPipeWidth()
             <0+bird.birdShape.getPosition().x+bird.birdShape.getRadius()) {
@@ -49,24 +54,38 @@ void World::incrementScore(Pipe& pipeCouple)
 
 void World::step()
 {
-    bird.update();
     createNewPipes();
-    for (auto& pipeCouple : pipes) {
-        pipeCouple.update();
-        eraseOffScreenPipes(pipeCouple);
-        incrementScore(pipeCouple);
-        if (pipeCouple.getPipeHit() || (bird.birdShape.getPosition().y>1080-2*bird.birdShape.getRadius())) reset();
+    for (int i = 0; i<birds.size(); i++) {
+        for (auto& pipeCouple : pipes) {
+            pipeCouple.update();
+            eraseOffScreenPipes(pipeCouple);
+            incrementScore(pipeCouple, birds[i]);
+            if (pipeCouple.getPipeHit()
+                    || (birds[i].birdShape.getPosition().y>1080-2*birds[i].birdShape.getRadius())
+                    || birds[i].birdShape.getPosition().y+birds[i].birdShape.getRadius()<0)
+                birds.erase(birds.begin()+i);
+        }
+        birds[i].think(pipes);
+        birds[i].update();
+        checkCollisions(birds[i]);
     }
-    checkCollisions();
     scoreValue.setString(std::to_string(score));
+    if (birds.empty()) reset();
+    std::cout << pipes.size() << " " << birds.size() << std::endl;
 }
 
 void World::reset()
 {
     score = 0;
     pipes.clear();
+    Pipe tempPipe;
+    pipes.push_back(tempPipe);
     clock.restart();
-    bird.reset();
+    birds.clear();
+    for (int i = 0; i<TOTAL; ++i) {
+        Bird tempBird;
+        birds.push_back(tempBird);
+    }
 }
 
 void World::drawScore()
@@ -100,7 +119,7 @@ void World::drawGround()
 void World::draw(sf::RenderWindow& win)
 {
     win.draw(backgroundSprite);
-    bird.draw(win);
+    for (auto& bird : birds) bird.draw(win);
     for (auto& pipeCouple : pipes) pipeCouple.draw(win);
 //    win.draw(ground);
     win.draw(scoreLabel);

@@ -6,27 +6,34 @@
 #define FLAPPYBIRDWITHAI_BIRD_H
 
 #include <SFML/Graphics.hpp>
+#include "NeuralNet.hpp"
+#include "Pipe.h"
 
 class Bird {
-    const int x = 1920/4;
+    int x = 1920/4;
     double y = 1080/3.0;
     double velocity = 0;
     double gravity = 0.7;
     double lift = -14;
 
+    NeuralNet brain;
+
     sf::Texture birdTexture;
 public:
     sf::CircleShape birdShape;
 
-    Bird() { assert(birdTexture.loadFromFile("bird.png")); }
+    Bird()
+            :brain(4, 4, 2, 1, 0.1) { assert(birdTexture.loadFromFile("bird.png")); }
 
     double getVelocity() { return velocity; }
+
+    void think(std::vector<Pipe>& pipes);
 
     void up();
     void reset();
 
-    void draw(sf::RenderWindow& win);
     void update();
+    void draw(sf::RenderWindow& win);
 };
 
 #endif //FLAPPYBIRDWITHAI_BIRD_H
