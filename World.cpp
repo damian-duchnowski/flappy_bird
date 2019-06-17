@@ -23,7 +23,7 @@ void World::checkCollisions()
 
 void World::createNewPipes()
 {
-    if (clock.getElapsedTime().asSeconds()>2.5) {
+    if (clock.getElapsedTime().asSeconds()>2.0) {
         Pipe tempPipe;
         pipes.push_back(tempPipe);
         clock.restart();
