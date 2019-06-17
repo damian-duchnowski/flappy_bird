@@ -14,7 +14,7 @@ class Pipe {
     int topPipeLength = rand()%1080/2;
     int bottomPipeLength = 1080-topPipeLength-gapSize;
     int xPos = 1920;
-    int speed = 5;
+    int speed = 10;
     bool pipeHit = false;
     bool pipePassed = false;
     bool checkedIfPassed = false;

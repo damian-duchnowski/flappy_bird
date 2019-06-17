@@ -23,14 +23,14 @@ void Bird::think(std::vector<Pipe>& pipes)
     inputs(0, 2) = (1080-closest.getBottomPipeLength())/1080.0;
     inputs(0, 3) = closest.getXPos()/1080.0;
 
-    Matrix targetOutput(1, 2);
-    targetOutput(0, 0) = 1.0;
-    targetOutput(0, 1) = 0.0;
+//    Matrix targetOutput(1, 2);
+//    targetOutput(0, 0) = 1.0;
+//    targetOutput(0, 1) = 0.0;
+//
+//    brain.trainingCycle(inputs, targetOutput);
+//    Matrix query(1, 4);
 
-    brain.trainingCycle(inputs, targetOutput);
-    Matrix query(1, 4);
-
-    Matrix output = brain.queryNet(query);
+    Matrix output = brain.queryNet(inputs);
     if (output(0, 0)>output(0, 1)) up();
 }
 

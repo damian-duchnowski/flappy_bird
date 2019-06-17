@@ -11,11 +11,8 @@ int main()
     srand(time(nullptr));
 
     // create the window
-    sf::ContextSettings settings;
-    settings.antialiasingLevel = 8;
-
-    sf::RenderWindow win(sf::VideoMode(1920, 1080), "Flappy Bird", sf::Style::Default, settings);
-    win.setFramerateLimit(60);
+    sf::RenderWindow win(sf::VideoMode(1920, 1080), "Flappy Bird");
+    win.setFramerateLimit(30);
 
     World world;
     // run the program as long as the window is open
