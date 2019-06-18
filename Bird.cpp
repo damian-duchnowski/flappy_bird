@@ -31,7 +31,7 @@ void Bird::think(std::vector<Pipe>& pipes)
 //    Matrix query(1, 4);
 
     Matrix output = brain.queryNet(inputs);
-    if (output(0, 0)>output(0, 1)) up();
+    if (output(0, 0)>0.5) up();
 }
 
 void Bird::up()

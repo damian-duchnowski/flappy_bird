@@ -23,7 +23,7 @@ public:
     sf::CircleShape birdShape;
 
     Bird()
-            :brain(4, 4, 2, 1, 0.1) { assert(birdTexture.loadFromFile("bird.png")); }
+            :brain(4, 4, 1, 1, 0.1) { assert(birdTexture.loadFromFile("bird.png")); }
 
     double getVelocity() { return velocity; }
 
